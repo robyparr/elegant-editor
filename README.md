@@ -26,3 +26,10 @@ This will run a demo page to see the libary in action.
 ```
 npm start
 ```
+
+## Building and publishing
+
+```
+npm run build
+npm publish
+```
