@@ -1,51 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class Editor extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.onEditorSubmit = this.onEditorSubmit.bind(this);
-    this.onEditorBlur = this.onEditorBlur.bind(this);
-  }
-
-  onEditorSubmit(e) {
-    if (this.props.multilineEditor && e.shiftKey && e.key === 'Enter') {
-      this.props.activateDisplayMode();
-    } else if (!this.props.multilineEditor && e.key === 'Enter') {
-      this.props.activateDisplayMode();
-    } else {
-      return;
+const Editor = (props) => {
+  const onEditorSubmit = (e) => {
+    if (props.multilineEditor && e.shiftKey && e.key === 'Enter') {
+      props.activateDisplayMode();
+    } else if (!props.multilineEditor && e.key === 'Enter') {
+      props.activateDisplayMode();
     }
-  }
+  };
 
-  onEditorBlur(e) {
-    this.props.activateDisplayMode();
-  }
+  const onEditorBlur = (e) => props.activateDisplayMode();
 
-  render() {
-    const props = {
-      onBlur: this.onEditorBlur,
-      onKeyPress: this.onEditorSubmit,
-      onChange: (e) => this.props.onValueChanged(e.target.value),
-      onFocus: (e) => e.target.select(),
-      autoFocus: true
-    };
+  const editorProps = {
+    onBlur: onEditorBlur,
+    onKeyPress: onEditorSubmit,
+    onChange: (e) => props.onValueChanged(e.target.value),
+    onFocus: (e) => e.target.select(),
+    autoFocus: true
+  };
 
-    if (this.props.editingElement === "input") {
-      return (
-        <this.props.editingElement
-          {...props}
-          value={this.props.value} />
-      );
-    }
-
-    return (
-      <this.props.editingElement {...props} value={this.props.value}>
-        {this.props.value}
-      </this.props.editingElement>
-    );
-  }
+  return (
+    <props.editingElement {...editorProps} value={props.value} />
+  );
 }
 
 Editor.propTypes = {

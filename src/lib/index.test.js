@@ -13,11 +13,19 @@ const value = "Hello, World!";
 
 describe('<ElegantEditor />', () => {
   it('renders <Display> with correct value', () => {
-    const wrapper = shallow(<ElegantEditor value={value} />);
+    const wrapper = mount(<ElegantEditor value={value} />);
     const display = wrapper.find(Display);
 
-    expect(display).toHaveLength(1);
     expect(display.html()).toEqual(`<p>${value}</p>`);
+    expect(display.text()).toEqual(value);
+  });
+
+  it('renders <Display /> with custom elements', () => {
+    const wrapper = mount(<ElegantEditor value={value} displayElement='h2' />);
+    const display = wrapper.find(Display);
+
+    expect(display.html()).toEqual(`<h2>${value}</h2>`);
+    expect(display.text()).toEqual(value);
   });
 
   it('renders editor if isEditing={true}', () => {
@@ -50,10 +58,11 @@ describe('<ElegantEditor />', () => {
     const elegantEditor = mount(
       <ElegantEditor value={value} isEditing={true} />
     );
+    const input = elegantEditor.find('input');
 
     expect(elegantEditor.html()).toEqual(`<input value="${value}">`);
-    elegantEditor.find('input').simulate('change', { target: { value: 'test' } });
-    elegantEditor.find('input').simulate('keyPress', { key: 'Enter' });
+    input.simulate('change', { target: { value: 'test' } });
+    input.simulate('keyPress', { key: 'Enter' });
     expect(elegantEditor.text()).toEqual('test');
   });
 

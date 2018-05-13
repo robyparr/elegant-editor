@@ -1,30 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class Display extends React.Component {
-  constructor(props) {
-    super(props);
+const Display = (props) => {
+  const clickEvent = props.singleClickToEdit ? 'onClick' : 'onDoubleClick';
+  const displayProps = { [clickEvent]: props.activateEditMode };
+
+  const styles = {};
+  if (props.multilineEditor) {
+    styles['whiteSpace'] = 'pre';
   }
 
-  render() {
-    const clickEvent = this.props.singleClickToEdit ? 'onClick' : 'onDoubleClick';
-    const props = {
-      [clickEvent]: this.props.activateEditMode
-    };
-
-    const styles = {};
-
-    if (this.props.multilineEditor) {
-      styles['whiteSpace'] = 'pre';
-    }
-
-
-    return (
-      <this.props.displayElement {...props} style={styles}>
-        {this.props.value}
-      </this.props.displayElement>
-    );
-  }
+  return (
+    <props.displayElement {...displayProps} style={styles}>
+      {props.value}
+    </props.displayElement>
+  );
 }
 
 Display.propTypes = {
