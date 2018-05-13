@@ -110,4 +110,48 @@ describe('<ElegantEditor />', () => {
     elegantEditor.find('input').simulate('keyPress', { key: 'Enter' })
     expect(isCurrentlyEditMode).toEqual(false);
   });
+
+  it('passes displayClassName to the display element', () => {
+    const elegantEditor = mount(
+      <ElegantEditor value={value} displayClassName="display-class" />
+    );
+
+    expect(elegantEditor.html()).toContain('class="display-class"');
+  });
+
+  it('passes displayClassName to the custom display element', () => {
+    const elegantEditor = mount(
+      <ElegantEditor
+        value={value}
+        displayElement="h2"
+        displayClassName="display-class" />
+    );
+
+    expect(elegantEditor.html())
+      .toEqual(`<h2 class="display-class">${value}</h2>`);
+  });
+
+  it('passes editorClassName to the editor element', () => {
+    const elegantEditor = mount(
+      <ElegantEditor
+        value={value}
+        isEditing={true}
+        editorClassName="editor-class" />
+    );
+
+    expect(elegantEditor.html()).toContain('class="editor-class"');
+  });
+
+  it('passes editorClassName to the custom editor element', () => {
+    const elegantEditor = mount(
+      <ElegantEditor
+        value={value}
+        isEditing={true}
+        editingElement="textarea"
+        editorClassName="editor-class" />
+    );
+
+    expect(elegantEditor.html())
+      .toEqual(`<textarea class="editor-class">${value}</textarea>`);
+  });
 });

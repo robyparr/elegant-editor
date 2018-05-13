@@ -57,6 +57,7 @@ class ElegantEditor extends React.Component {
     if (this.state.isEditing) {
       return (
         <Editor
+          className={this.props.editorClassName}
           activateDisplayMode={this.activateDisplayMode}
           multilineEditor={this.state.multilineEditor}
           onValueChanged={newValue => this.setState({ value: newValue })}
@@ -67,6 +68,7 @@ class ElegantEditor extends React.Component {
 
     return (
       <Display
+        className={this.props.displayClassName}
         activateEditMode={this.activateEditMode}
         displayElement={this.state.displayElement}
         multilineEditor={this.state.multilineEditor}
@@ -84,7 +86,9 @@ ElegantEditor.propTypes = {
   onChange: PropTypes.func,
   onEditingChange: PropTypes.func,
   singleClickToEdit: PropTypes.bool,
-  multilineEditor: PropTypes.bool
+  multilineEditor: PropTypes.bool,
+  displayClassName: PropTypes.string,
+  editorClassName: PropTypes.string
 };
 
 export default ElegantEditor;

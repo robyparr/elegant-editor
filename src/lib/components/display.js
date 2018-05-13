@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 
 const Display = (props) => {
   const clickEvent = props.singleClickToEdit ? 'onClick' : 'onDoubleClick';
-  const displayProps = { [clickEvent]: props.activateEditMode };
+  const displayProps = {
+    [clickEvent]: props.activateEditMode,
+    className: props.className
+  };
 
   const styles = {};
   if (props.multilineEditor) {
@@ -21,7 +24,8 @@ Display.propTypes = {
   displayElement: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   activateEditMode: PropTypes.func.isRequired,
-  singleClickToEdit: PropTypes.bool
+  singleClickToEdit: PropTypes.bool,
+  className: PropTypes.string
 };
 
 export default Display;

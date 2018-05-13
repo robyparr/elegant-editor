@@ -22,6 +22,16 @@ const App = () => (
     <ElegantEditor
       value={DEFAULT_VALUE}
       editingElement="textarea" />
+
+    <h2>Custom styling with classes</h2>
+    <ElegantEditor
+      value={DEFAULT_VALUE}
+      displayClassName="red-text" />
+
+    <ElegantEditor
+      value={DEFAULT_VALUE}
+      isEditing={true}
+      editorClassName="red-text" />
   </div>
 );
 

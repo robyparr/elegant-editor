@@ -17,7 +17,8 @@ const Editor = (props) => {
     onKeyPress: onEditorSubmit,
     onChange: (e) => props.onValueChanged(e.target.value),
     onFocus: (e) => e.target.select(),
-    autoFocus: true
+    autoFocus: true,
+    className: props.className
   };
 
   return (
@@ -29,7 +30,8 @@ Editor.propTypes = {
   activateDisplayMode: PropTypes.func.isRequired,
   onValueChanged: PropTypes.func.isRequired,
   editingElement: PropTypes.string,
-  value: PropTypes.string
+  value: PropTypes.string,
+  className: PropTypes.string
 };
 
 export default Editor;
