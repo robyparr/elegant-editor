@@ -21,7 +21,11 @@ const Display = (props) => {
 }
 
 Display.propTypes = {
-  displayElement: PropTypes.string.isRequired,
+  displayElement: PropTypes.oneOfType([
+    PropTypes.element.isRequired,
+    PropTypes.func.isRequired,
+    PropTypes.string.isRequired
+  ]),
   value: PropTypes.string.isRequired,
   activateEditMode: PropTypes.func.isRequired,
   singleClickToEdit: PropTypes.bool,

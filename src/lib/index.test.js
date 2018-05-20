@@ -2,7 +2,7 @@ import React from 'react';
 import { configure, shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import ElegantEditor, { autoResizingMultilineEditor } from './index';
+import ElegantEditor, { autoResizingMultilineEditor, markdownDisplay } from './index';
 import Display from './components/display';
 import Editor from './components/editor';
 
@@ -166,5 +166,25 @@ describe('<ElegantEditor />', () => {
 
     expect(elegantEditor.html()).toContain('<textarea class="editor-class"');
     expect(elegantEditor.text()).toEqual(value);
+  });
+
+  it('markdownDisplay higher order component creates a markdown renderer', () => {
+    const MarkdownDisplay = markdownDisplay(ElegantEditor);
+    const elegantEditor = mount(<MarkdownDisplay value="# Header 1" />);
+
+    expect(elegantEditor.html()).toContain('<h1 id="header-1">Header 1</h1>');
+    expect(elegantEditor.text().trim()).toEqual("Header 1");
+  });
+
+  it('can compose multiple higher order components', () => {
+    const AutoResizing = autoResizingMultilineEditor(ElegantEditor);
+    const MarkdownDisplay = markdownDisplay(AutoResizing);
+    const elegantEditor = mount(<MarkdownDisplay value="# Header 1" />);
+
+    expect(elegantEditor.html()).toContain('<h1 id="header-1">Header 1</h1>');
+    expect(elegantEditor.text().trim()).toEqual("Header 1");
+    elegantEditor.simulate('doubleClick');
+    expect(elegantEditor.html()).toContain('<textarea');
+    expect(elegantEditor.text()).toEqual("# Header 1");
   });
 });

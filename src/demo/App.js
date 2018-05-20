@@ -1,9 +1,11 @@
 import React from 'react';
-import ElegantEditor, { autoResizingMultilineEditor } from '../lib';
+import ElegantEditor, { autoResizingMultilineEditor, markdownDisplay } from '../lib';
 
 const DEFAULT_VALUE = "Hello, World!";
 
 const AutoResizingElegantEditor = autoResizingMultilineEditor(ElegantEditor);
+const MarkdownDisplayEditor = markdownDisplay(ElegantEditor);
+const AutoResizingMarkdownEditor = autoResizingMultilineEditor(MarkdownDisplayEditor);
 
 const App = () => (
   <div>
@@ -37,6 +39,12 @@ const App = () => (
 
     <h2>Auto-resizing multiline editor</h2>
     <AutoResizingElegantEditor value={DEFAULT_VALUE} />
+
+    <h2>Markdown Display</h2>
+    <MarkdownDisplayEditor value="This is a **markdown display** component." />
+
+    <h2>Markdown Display with auto-resizing editor</h2>
+    <AutoResizingMarkdownEditor value="This is also a **markdown** component." />
   </div>
 );
 

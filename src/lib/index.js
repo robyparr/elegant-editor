@@ -5,6 +5,7 @@ import Editor from './components/editor';
 import Display from './components/display';
 
 import autoResizingMultilineEditor from './components/higher_order/autoResizingMultilineEditor';
+import markdownDisplay from './components/higher_order/markdownDisplay';
 
 class ElegantEditor extends React.Component {
   constructor(props) {
@@ -82,7 +83,11 @@ class ElegantEditor extends React.Component {
 
 ElegantEditor.propTypes = {
   value: PropTypes.string.isRequired,
-  displayElement: PropTypes.string,
+  displayElement: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.func,
+    PropTypes.string
+  ]),
   editingElement: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.func,
@@ -98,4 +103,4 @@ ElegantEditor.propTypes = {
 };
 
 export default ElegantEditor;
-export { autoResizingMultilineEditor };
+export { autoResizingMultilineEditor, markdownDisplay };
