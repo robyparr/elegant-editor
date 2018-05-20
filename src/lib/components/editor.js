@@ -29,7 +29,11 @@ const Editor = (props) => {
 Editor.propTypes = {
   activateDisplayMode: PropTypes.func.isRequired,
   onValueChanged: PropTypes.func.isRequired,
-  editingElement: PropTypes.string,
+  editingElement: PropTypes.oneOfType([
+    PropTypes.element.isRequired,
+    PropTypes.func.isRequired,
+    PropTypes.string.isRequired
+  ]),
   value: PropTypes.string,
   className: PropTypes.string
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import { configure, shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import ElegantEditor from './index';
+import ElegantEditor, { autoResizingMultilineEditor } from './index';
 import Display from './components/display';
 import Editor from './components/editor';
 
@@ -153,5 +153,18 @@ describe('<ElegantEditor />', () => {
 
     expect(elegantEditor.html())
       .toEqual(`<textarea class="editor-class">${value}</textarea>`);
+  });
+
+  it('autoResizingMultilineEditor HOC creates an autoresizing textarea', () => {
+    const AutoResizing = autoResizingMultilineEditor(ElegantEditor);
+    const elegantEditor = mount(
+      <AutoResizing
+        value={value}
+        isEditing={true}
+        editorClassName="editor-class" />
+    );
+
+    expect(elegantEditor.html()).toContain('<textarea class="editor-class"');
+    expect(elegantEditor.text()).toEqual(value);
   });
 });

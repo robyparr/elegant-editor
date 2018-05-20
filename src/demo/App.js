@@ -1,7 +1,9 @@
 import React from 'react';
-import ElegantEditor from '../lib';
+import ElegantEditor, { autoResizingMultilineEditor } from '../lib';
 
 const DEFAULT_VALUE = "Hello, World!";
+
+const AutoResizingElegantEditor = autoResizingMultilineEditor(ElegantEditor);
 
 const App = () => (
   <div>
@@ -32,6 +34,9 @@ const App = () => (
       value={DEFAULT_VALUE}
       isEditing={true}
       editorClassName="red-text" />
+
+    <h2>Auto-resizing multiline editor</h2>
+    <AutoResizingElegantEditor value={DEFAULT_VALUE} />
   </div>
 );
 

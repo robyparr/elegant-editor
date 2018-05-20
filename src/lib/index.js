@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import Editor from './components/editor';
 import Display from './components/display';
 
+import autoResizingMultilineEditor from './components/higher_order/autoResizingMultilineEditor';
+
 class ElegantEditor extends React.Component {
   constructor(props) {
     super(props);
@@ -81,7 +83,11 @@ class ElegantEditor extends React.Component {
 ElegantEditor.propTypes = {
   value: PropTypes.string.isRequired,
   displayElement: PropTypes.string,
-  editingElement: PropTypes.string,
+  editingElement: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.func,
+    PropTypes.string
+  ]),
   isEditing: PropTypes.bool,
   onChange: PropTypes.func,
   onEditingChange: PropTypes.func,
@@ -92,3 +98,4 @@ ElegantEditor.propTypes = {
 };
 
 export default ElegantEditor;
+export { autoResizingMultilineEditor };
